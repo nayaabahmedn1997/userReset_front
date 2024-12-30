@@ -36,7 +36,15 @@ const Home = () => {
       navigate("/login");
     }
     useEffect(()=>{
+      const token = localStorage.getItem("userToken");
+      if(!token)
+      {
+        navigate("/login");
+      }
+      else
+      {
       fetchUserData();
+      }
     }, []);
 
   return (

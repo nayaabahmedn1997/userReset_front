@@ -6,14 +6,19 @@ import axiosInstance from "../axiosInstance";
 const ResetPassword = () => {
   const { token } = useParams(); // Get the token from the URL
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(password === confirmPassword)
+    {
     setLoading(true);
     setMessage("");
     try {
+
       const res = await axiosInstance.post(`/reset-password/${token}`, { password });
       setMessage(res.data.message);
       navigate("/login");
@@ -22,6 +27,11 @@ const [loading, setLoading] = useState(false);
     }
     finally{
         setLoading(false);
+    }
+    }
+    else
+    {
+        setMessage("Both passwords are not matching")
     }
   };
 
@@ -45,7 +55,7 @@ const [loading, setLoading] = useState(false);
                 <form onSubmit={handleSubmit}>
 
                   <div className="mb-3">
-                    <label htmlFor="email" className="form-label">
+                    <label htmlFor="password" className="form-label">
                      New Password
                     </label>
                     <input
@@ -57,6 +67,23 @@ const [loading, setLoading] = useState(false);
                       placeholder="Enter your new password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label htmlFor="confirm-password" className="form-label">
+                     Confirm Password
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="confirm-password"
+                      name="confirmPassword"
+
+                      placeholder="Confirm new password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
                       required
                     />
                   </div>

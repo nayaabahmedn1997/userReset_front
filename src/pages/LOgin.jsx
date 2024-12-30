@@ -84,7 +84,7 @@ const LOgin = () => {
                 </div>
                 <div className="text-center">
                   <Link className='custom-link' to="/forgot-password">
-                    Forgot teh password? click here to reset
+                    Forgot the password? click here to reset
                   </Link>
                   < br/>
                   <Link className='custom-link' to="/register">

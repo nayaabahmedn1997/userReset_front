@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const axiosInstance = axios.create({
-    baseURL:"http://localhost:8000/api/users"
+    baseURL:"https://userreset-back.onrender.com/api/users"
 });
 
 export default axiosInstance;

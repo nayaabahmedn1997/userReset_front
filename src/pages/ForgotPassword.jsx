@@ -18,7 +18,10 @@ const ForgotPassword = () => {
     try {
       const res = await axiosInstance.post("/forgot-password", { email });
       setMessage(res.data.message);
+      localStorage.setItem("reset-token", res.data.resetToken);
+      navigate(`/reset-password/${res.data.resetToken}`);
     } catch (err) {
+      localStorage.removeItem("/reset-token");
       setMessage(err.response?.data?.message || "Something went wrong");
     }
     finally{
